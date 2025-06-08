@@ -104,7 +104,7 @@ main h1 {
     color: transparent;
     background-clip: text;
     -webkit-background-clip: text; /* For Safari */
-    /* By default, hide on smaller screens, shown on larger screens */
+    /* By default, show on larger screens */
     display: block;
 }
 
@@ -118,7 +118,7 @@ main h2 {
     color: transparent;
     background-clip: text;
     -webkit-background-clip: text; /* For Safari */
-    /* By default, hide on larger screens, shown on smaller screens */
+    /* By default, hide on larger screens */
     display: none;
 }
 
@@ -907,103 +907,7 @@ footer h3 {
     }
 
     .bento-grid {
-        grid-template-columns: repeat(2, 1fr); /* Two columns for bento grid */
-        grid-template-areas:
-            "intro tech"
-            "time passion";
-        height: 80vh; /* Adjust height for better fit */
-        width: 90%;
-        gap: 1.5rem;
-    }
-
-    .intro {
-        min-height: 400px;
-    }
-
-    .tech {
-        min-height: 400px;
-    }
-
-    .time, .passion {
-        min-height: 200px;
-    }
-
-    .model-box {
-        right: 5%;
-        top: 0%;
-        width: 28rem;
-        height: 28rem;
-        transform: scale(0.8);
-        transform-origin: center;
-    }
-
-    .projects-section {
-        margin-top: 18rem;
-    }
-
-    .projects-section h3, .section-header h3 {
-        font-size: 4.5rem;
-    }
-
-    .slider {
-        --width: 35rem;
-        --height: 18rem;
-    }
-
-    .slider .list {
-        min-width: calc(var(--width) * var(--quantity));
-    }
-
-    .contact-grid {
-        grid-template-columns: repeat(2, 1fr); /* Two columns for contact */
-        max-width: 800px;
-        margin: 0 auto;
-    }
-
-    footer {
-        padding: 2rem 3rem;
-    }
-}
-
-/* Tablets & Small Laptops (e.g., iPad portrait, small notebooks) - max-width: 768px */
-@media (min-width: 481px) and (max-width: 768px) {
-    body {
-        padding: 2.5rem;
-    }
-
-    main h1 {
-        display: none; /* Hide large H1 on tablets/small laptops */
-    }
-
-    main h2 {
-        display: block; /* Show H2 on tablets/small laptops */
-        font-size: 6rem;
-        margin-top: -3rem;
-    }
-
-    .bio {
-        max-width: 20rem;
-        font-size: 0.9rem;
-    }
-
-    .scroll-down {
-        right: 4%;
-        bottom: 8%;
-    }
-
-    .about-section {
-        margin-top: 15rem;
-        height: auto;
-        padding-bottom: 8rem;
-    }
-
-    .about-title, .projects-section h3, .section-header h3 {
-        font-size: 4rem;
-        margin-bottom: 4%;
-    }
-
-    .bento-grid {
-        grid-template-columns: 1fr; /* Stack cards vertically */
+        grid-template-columns: 1fr; /* Stack cards vertically for simplicity on smaller laptops */
         grid-template-areas:
             "intro"
             "tech"
@@ -1051,11 +955,15 @@ footer h3 {
     }
 
     .projects-section {
-        margin-top: 15rem;
+        margin-top: 15rem; /* Adjusted for consistency */
+    }
+
+    .projects-section h3, .section-header h3 {
+        font-size: 4.5rem;
     }
 
     .slider {
-        --width: 28rem; /* Adjusted for tablets */
+        --width: 28rem; /* Adjusted for tablets/small laptops */
         --height: 15rem;
     }
 
@@ -1070,7 +978,7 @@ footer h3 {
     }
 
     .contact-grid {
-        grid-template-columns: 1fr; /* Keep single column */
+        grid-template-columns: 1fr; /* Keep single column for consistency */
     }
 
     footer {
@@ -1084,18 +992,19 @@ footer h3 {
     }
 }
 
-/* Small Phones (e.g., iPhone X portrait) - max-width: 480px */
-@media (min-width: 375px) and (max-width: 480px) {
+/* Tablets & Small Phones (e.g., iPad portrait, small notebooks) - max-width: 768px */
+/* This media query now covers from 481px up to 768px, ensuring consistent behavior for tablets. */
+@media (min-width: 481px) and (max-width: 768px) {
     body {
-        padding: 1.5rem;
+        padding: 2.5rem;
     }
 
     main h1 {
-        display: none; /* Hide H1 on small phones */
+        display: none; /* Hide large H1 on tablets/small phones */
     }
 
     main h2 {
-        display: block; /* Show H2 on small phones */
+        display: block; /* Show H2 on tablets/small phones */
         font-size: 6rem;
         margin-top: -3rem;
     }
@@ -1149,13 +1058,31 @@ footer h3 {
         margin-top: 10rem;
     }
 
-    .slider .list .item {
-        width: 20rem;
-        height: 10rem;
+    .slider-container {
+        flex-direction: column; /* Stack slider and buttons */
+        gap: 0.5rem;
+    }
+
+    .slider {
+        width: 95%; /* Adjust width to fit */
+        --width: 20rem; /* Adjusted for better fit on tablets/small phones */
+        --height: 10rem; /* Adjusted height */
     }
 
     .slider .list {
-        min-width: calc(10rem * var(--quantity)); /* Adjust based on new width */
+        min-width: calc(var(--width) * var(--quantity)); /* Adjust based on new width */
+    }
+
+    .slider .list .item {
+         width: var(--width); /* Ensure individual item uses the updated width */
+         height: var(--height); /* Ensure individual item uses the updated height */
+    }
+
+    .slider-btn {
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 1.2rem;
+        position: static; /* Remove absolute positioning, let it flow */
     }
 
     .contact-section {
@@ -1170,6 +1097,7 @@ footer h3 {
         font-size: 1rem;
     }
 }
+
 
 /* Smallest Phones (e.g., iPhone SE portrait) - max-width: 374px */
 @media (max-width: 374px) {
@@ -1288,7 +1216,7 @@ footer h3 {
     }
 
     .slider-container {
-        flex-direction: column;
+        flex-direction: column; /* Stack slider and buttons */
         gap: 0.5rem;
     }
 
@@ -1302,11 +1230,16 @@ footer h3 {
         min-width: calc(var(--width) * var(--quantity)); /* Adjust based on new width */
     }
 
+    .slider .list .item {
+        width: var(--width); /* Ensure individual item uses the updated width */
+        height: var(--height); /* Ensure individual item uses the updated height */
+    }
+
     .slider-btn {
         width: 2.5rem;
         height: 2.5rem;
         font-size: 1.2rem;
-        position: static; /* Remove absolute positioning */
+        position: static; /* Remove absolute positioning, let it flow */
     }
 
     .contact-section {
