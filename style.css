@@ -11,12 +11,12 @@
     --color-text-light: #7b7b7b;
 
     --gradient-dark: linear-gradient(90deg,
-            rgba(29, 40, 41, 1) 0%,
-            rgba(24, 30, 31, 1) 11%,
-            rgba(19, 19, 20, 1) 41%,
-            rgba(19, 19, 20, 1) 58%,
-            rgba(24, 30, 31, 1) 85%,
-            rgba(29, 40, 41, 1) 100%);
+                rgba(29, 40, 41, 1) 0%,
+                rgba(24, 30, 31, 1) 11%,
+                rgba(19, 19, 20, 1) 41%,
+                rgba(19, 19, 20, 1) 58%,
+                rgba(24, 30, 31, 1) 85%,
+                rgba(29, 40, 41, 1) 100%);
     --gradient-text-light: linear-gradient(rgb(133, 133, 133), rgb(255, 255, 255));
     --gradient-location: linear-gradient(to right, #76b0ab, #ffffff, #842626);
 
@@ -230,7 +230,7 @@ main h2 {
     height: 90vh; /* Consider making this height auto and relying on content for larger screens */
     width: 90%;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-areas: 
+    grid-template-areas:
         "intro intro tech"
         "time passion tech";
     gap: 1.5rem;
@@ -247,23 +247,23 @@ main h2 {
 }
 
 /* CARD SPECIFIC AREAS */
-.intro { 
-    grid-area: intro; 
+.intro {
+    grid-area: intro;
     min-height: 300px; /* Use min-height for flexibility */
 }
 
 .tech {
-    grid-area: tech; 
+    grid-area: tech;
     min-height: 450px;
 }
 
-.time { 
-    grid-area: time; 
+.time {
+    grid-area: time;
     min-height: 220px;
 }
 
-.passion { 
-    grid-area: passion; 
+.passion {
+    grid-area: passion;
     min-height: 220px;
 }
 
@@ -280,8 +280,8 @@ main h2 {
     position: absolute;
     inset: 0 0 0 0;
     background: radial-gradient(circle at var(--x) var(--y),
-                rgba(124, 233, 230, 0.1),
-                transparent 40%);
+                                rgba(124, 233, 230, 0.1),
+                                transparent 40%);
     opacity: 0;
     transition: opacity 0.3s ease;
     z-index: -1;
@@ -529,7 +529,7 @@ main h2 {
     }
     100% {
         /* This calculation might need fine-tuning based on actual content width */
-        transform: translateX(calc(-100% + 100vw)); 
+        transform: translateX(calc(-100% + 100vw));
     }
 }
 
@@ -750,8 +750,8 @@ footer h3 {
 }
 
 /* =========================================
-   Media Queries for Responsiveness
-   ========================================= */
+    Media Queries for Responsiveness
+    ========================================= */
 
 /* Smallest Phones (e.g., iPhone SE portrait) - max-width: 374px */
 @media (max-width: 374px) {
@@ -821,7 +821,7 @@ footer h3 {
 
     .bento-grid {
         grid-template-columns: 1fr;
-        grid-template-areas: 
+        grid-template-areas:
             "intro"
             "tech"
             "time"
@@ -879,7 +879,7 @@ footer h3 {
         --width: 15rem; /* Smaller project card width */
         --height: 8rem; /* Smaller project card height */
     }
-    
+
     .slider .list {
         min-width: calc(var(--width) * var(--quantity)); /* Adjust based on new width */
     }
@@ -980,7 +980,7 @@ footer h3 {
 
     .bento-grid {
         grid-template-columns: 1fr;
-        grid-template-areas: 
+        grid-template-areas:
             "intro"
             "tech"
             "time"
@@ -1000,11 +1000,11 @@ footer h3 {
         height: 18rem;
         scale: 0.7;
     }
-    
+
     .info-3D {
         animation: floatMobile 6s ease-in-out infinite;
     }
-    
+
     @keyframes floatMobile {
         0%, 100% {
             transform: translateY(0) rotateY(0deg) scale(0.7);
@@ -1078,7 +1078,7 @@ footer h3 {
 
     .bento-grid {
         grid-template-columns: 1fr; /* Stack cards vertically */
-        grid-template-areas: 
+        grid-template-areas:
             "intro"
             "tech"
             "time"
@@ -1184,7 +1184,7 @@ footer h3 {
 
     .bento-grid {
         grid-template-columns: repeat(2, 1fr);
-        grid-template-areas: 
+        grid-template-areas:
             "intro tech"
             "time passion";
         height: 80vh; /* Adjust height for better fit */
@@ -1192,7 +1192,7 @@ footer h3 {
         gap: 1.5rem;
     }
 
-    .intro { 
+    .intro {
         min-height: 400px;
     }
 
@@ -1200,7 +1200,7 @@ footer h3 {
         min-height: 400px;
     }
 
-    .time, .passion { 
+    .time, .passion {
         min-height: 200px;
     }
 
@@ -1250,12 +1250,12 @@ footer h3 {
         height: 80vh;
         width: 100%;
         grid-template-columns: auto auto; /* Keeps original structure */
-        grid-template-areas: 
+        grid-template-areas:
             "intro tech"
             "time passion"; /* Simplified grid areas for two columns */
     }
 
-    .intro { 
+    .intro {
         min-height: 700px; /* Example, adjust as needed */
         min-width: 300px;
     }
@@ -1265,13 +1265,13 @@ footer h3 {
         min-width: 250px;
     }
 
-    .time { 
+    .time {
         min-height: 300px;
         min-width: 250px;
     }
 
-    .passion { 
-        min-height: 220px; 
+    .passion {
+        min-height: 220px;
         min-width: 250px;
     }
 
