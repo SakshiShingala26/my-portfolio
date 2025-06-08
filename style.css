@@ -1,12 +1,45 @@
+/* Base Styles & Global Resets */
+:root {
+    /* Define custom properties for easier management */
+    --color-dark-primary: rgb(19, 19, 20);
+    --color-dark-secondary: rgb(24, 30, 31);
+    --color-dark-tertiary: rgb(29, 40, 41);
+    --color-white: white;
+    --color-lightgray: lightgray;
+    --color-accent: #7ce9e6; /* A lighter cyan for highlights */
+    --color-secondary-accent: #76b0ab; /* A slightly darker cyan for buttons */
+    --color-text-light: #7b7b7b;
+
+    --gradient-dark: linear-gradient(90deg,
+            rgba(29, 40, 41, 1) 0%,
+            rgba(24, 30, 31, 1) 11%,
+            rgba(19, 19, 20, 1) 41%,
+            rgba(19, 19, 20, 1) 58%,
+            rgba(24, 30, 31, 1) 85%,
+            rgba(29, 40, 41, 1) 100%);
+    --gradient-text-light: linear-gradient(rgb(133, 133, 133), rgb(255, 255, 255));
+    --gradient-location: linear-gradient(to right, #76b0ab, #ffffff, #842626);
+
+    /* Project Slider Variables (set via JS for dynamic width if needed, but good to have defaults) */
+    --width: 450px; /* Default width for a project item */
+    --height: 250px; /* Default height for a project item */
+    --quantity: 5; /* Example quantity, adjust as needed */
+}
+
+html {
+    font-size: 16px; /* Base font size for rem units */
+    scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+}
+
 body {
-    background: rgb(29, 40, 41);
-    background: -moz-linear-gradient(90deg, rgba(29, 40, 41, 1) 0%, rgba(24, 30, 31, 1) 11%, rgba(19, 19, 20, 1) 41%, rgba(19, 19, 20, 1) 58%, rgba(24, 30, 31, 1) 85%, rgba(29, 40, 41, 1) 100%);
-    background: -webkit-linear-gradient(90deg, rgba(29, 40, 41, 1) 0%, rgba(24, 30, 31, 1) 11%, rgba(19, 19, 20, 1) 41%, rgba(19, 19, 20, 1) 58%, rgba(24, 30, 31, 1) 85%, rgba(29, 40, 41, 1) 100%);
-    background: linear-gradient(90deg, rgba(29, 40, 41, 1) 0%, rgba(24, 30, 31, 1) 11%, rgba(19, 19, 20, 1) 41%, rgba(19, 19, 20, 1) 58%, rgba(24, 30, 31, 1) 85%, rgba(29, 40, 41, 1) 100%);
+    background: var(--gradient-dark);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#1d2829", endColorstr="#1d2829", GradientType=1);
-    color: white;
+    color: var(--color-white);
     padding: 3rem;
     position: relative;
+    min-height: 100vh; /* Ensure body takes full viewport height */
+    display: flex;
+    flex-direction: column;
 }
 
 * {
@@ -16,6 +49,7 @@ body {
     font-family: 'Arial', sans-serif;
 }
 
+/* Header */
 header {
     display: flex;
     justify-content: space-between;
@@ -36,12 +70,13 @@ header {
     border: 1px solid rgba(102, 102, 102, 0.5);
     border-radius: 50px;
     cursor: pointer;
-    color: white;
-    transition: 0.3s;
+    color: var(--color-white);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .contact-btn:hover {
-    background-color: #76b0ab37;
+    background-color: rgba(118, 176, 171, 0.2); /* A slightly more pronounced hover */
+    border-color: var(--color-accent);
 }
 
 /* MAIN SECTION */
@@ -49,15 +84,14 @@ main {
     position: relative;
     overflow: hidden;
     display: flex;
-    flex: 1;
+    flex: 1; /* Allow main to grow and take available space */
     flex-direction: column;
     justify-content: space-between;
-    min-height: 85.7vh;
+    min-height: 85.7vh; /* Adjusted to consider header/footer if they were fixed */
 }
 
 .title-section {
     margin-top: 3rem;
-         
 }
 
 main h1 {
@@ -66,9 +100,10 @@ main h1 {
     font-weight: 900;
     letter-spacing: 5px;
     line-height: 1;
-    background-image: linear-gradient(rgb(133, 133, 133), rgb(255, 255, 255));
+    background-image: var(--gradient-text-light);
     color: transparent;
     background-clip: text;
+    -webkit-background-clip: text; /* For Safari */
 }
 
 main h2 {
@@ -77,10 +112,11 @@ main h2 {
     font-weight: 700;
     letter-spacing: 5px;
     line-height: 1;
-    background-image: linear-gradient(rgb(133, 133, 133), rgb(255, 255, 255));
+    background-image: var(--gradient-text-light);
     color: transparent;
     background-clip: text;
-    display: none;
+    -webkit-background-clip: text; /* For Safari */
+    display: none; /* Hidden by default, shown on smaller screens */
 }
 
 .location {
@@ -91,20 +127,21 @@ main h2 {
 }
 
 .location p {
-    background-image: linear-gradient(to right, #76b0ab, #ffffff, #842626);
+    background-image: var(--gradient-location);
     color: transparent;
     background-clip: text;
+    -webkit-background-clip: text; /* For Safari */
     font-size: 1.1rem;
 }
 
 .bio-section {
-    margin-top: auto;
+    margin-top: auto; /* Pushes to the bottom */
     margin-bottom: 2rem;
     font-size: 1rem;
 }
 
 .bio {
-    font-size: 15px;
+    font-size: 0.9375rem; /* 15px / 16px */
     line-height: 1.6;
     font-weight: 300;
     letter-spacing: 1px;
@@ -128,10 +165,10 @@ main h2 {
     position: absolute;
     top: 20%;
     left: 50%;
-    height: 10px;
-    width: 10px;
+    height: 0.625rem; /* 10px */
+    width: 0.625rem; /* 10px */
     transform: translate(-50%, -100%) rotate(45deg);
-    border: 2px solid lightgray;
+    border: 2px solid var(--color-lightgray);
     border-top: transparent;
     border-left: transparent;
     animation: scroll-down 3s ease-in-out infinite;
@@ -145,6 +182,7 @@ main h2 {
 @keyframes scroll-down {
     0% {
         opacity: 0;
+        transform: translate(-50%, -100%) rotate(45deg) translateY(0);
     }
     30%, 60% {
         opacity: 1;
@@ -152,6 +190,7 @@ main h2 {
     100% {
         opacity: 0;
         top: 90%;
+        transform: translate(-50%, -100%) rotate(45deg) translateY(20px); /* Move down slightly */
     }
 }
 
@@ -162,6 +201,7 @@ main h2 {
     right: -14%;
     width: 130%;
     height: 130%;
+    /* Consider using object-fit: contain/cover if this is an img/video */
 }
 
 /* ABOUT SECTION */
@@ -178,15 +218,16 @@ main h2 {
 .about-title {
     margin-bottom: 5%;
     font-size: 5rem;
-    background-image: linear-gradient(rgb(133, 133, 133), rgb(255, 255, 255));
+    background-image: var(--gradient-text-light);
     color: transparent;
     background-clip: text;
+    -webkit-background-clip: text; /* For Safari */
 }
 
 .bento-grid {
     position: relative;
     display: grid;
-    height: 90vh;
+    height: 90vh; /* Consider making this height auto and relying on content for larger screens */
     width: 90%;
     grid-template-columns: repeat(3, 1fr);
     grid-template-areas: 
@@ -200,9 +241,7 @@ main h2 {
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 24px;
     padding: 2rem;
-    transition: transform 0.3s ease,
-                border-color 0.3s ease,
-                box-shadow 0.3s ease;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     position: relative;
     overflow: hidden;
 }
@@ -210,7 +249,7 @@ main h2 {
 /* CARD SPECIFIC AREAS */
 .intro { 
     grid-area: intro; 
-    min-height: 300px;
+    min-height: 300px; /* Use min-height for flexibility */
 }
 
 .tech {
@@ -256,11 +295,11 @@ main h2 {
     font-size: 1.5rem;
     font-weight: 300;
     margin-top: 1rem;
-    color: #7ce9e6;;
+    color: var(--color-accent);
 }
 
 .card-text {
-    color: #7b7b7b;
+    color: var(--color-text-light);
     line-height: 1.6;
     margin-top: 2rem;
     margin-bottom: 2rem;
@@ -269,11 +308,12 @@ main h2 {
 
 .bento-grid .background-img {
     position: absolute;
-    inset: -1% -1% -1% -1%;
-    width: 110%;
-    height: 110%;
+    inset: -1% -1% -1% -1%; /* Slightly larger to prevent gaps on border */
+    width: 110%; /* Adjust if inset doesn't cover completely */
+    height: 110%; /* Adjust if inset doesn't cover completely */
     object-fit: cover;
     z-index: -1;
+    filter: brightness(0.5); /* Dim background images slightly */
 }
 
 .model-box {
@@ -379,38 +419,6 @@ main h2 {
     }
 }
 
-/* Responsive adjustments */
-@media (max-width: 1400px) {
-    .model-box {
-        right: 10%;
-        top: 18%;
-        width: 25rem;
-        height: 25rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .model-box {
-        right: -4%;
-        top: 27%;
-        width: 18rem;
-        height: 18rem;
-    }
-    
-    .info-3D {
-        animation: floatMobile 6s ease-in-out infinite;
-    }
-    
-    @keyframes floatMobile {
-        0%, 100% {
-            transform: translateY(0) rotateY(0deg) scale(0.7);
-        }
-        50% {
-            transform: translateY(-15px) rotateY(5deg) scale(0.7);
-        }
-    }
-}
-
 .bento-grid .skills-group {
     position: absolute;
     bottom: 5%;
@@ -423,15 +431,15 @@ main h2 {
     bottom: 10%;
     padding: 0.75rem 1.5rem;
     background-color: rgba(124, 233, 230, 0.1);
-    color: #76b0ab;
+    color: var(--color-secondary-accent);
     border: none;
     border-radius: 50px;
     cursor: pointer;
-    transition: 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .bento-grid .btn:hover {
-    background-color: #76b0ab;
+    background-color: var(--color-secondary-accent);
     color: black;
 }
 
@@ -439,7 +447,6 @@ main h2 {
 .projects-section {
     width: 100%;
     margin-top: 20rem;
-    /* overflow: hidden; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -448,13 +455,13 @@ main h2 {
     padding: 10px 0;
 }
 
-
 .projects-section h3 {
     margin-bottom: 5%;
     font-size: 5rem;
-    background-image: linear-gradient(rgb(133, 133, 133), rgb(255, 255, 255));
+    background-image: var(--gradient-text-light);
     color: transparent;
     background-clip: text;
+    -webkit-background-clip: text; /* For Safari */
 }
 
 .slider-container {
@@ -463,7 +470,7 @@ main h2 {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 20px;
+    gap: 1.25rem; /* 20px */
 }
 
 .slider {
@@ -471,15 +478,15 @@ main h2 {
     width: 100%;
     overflow: hidden;
     position: relative;
-    padding: 0px 0;
+    padding: 0;
 }
 
 .slider .list {
     display: flex;
     min-width: calc(var(--width) * var(--quantity));
     position: relative;
-    padding: 20px 0;
-    gap: 20px;
+    padding: 1.25rem 0; /* 20px */
+    gap: 1.25rem; /* 20px */
     animation: autoRun 20s linear infinite;
     will-change: transform;
 }
@@ -490,15 +497,15 @@ main h2 {
     position: relative;
     flex-shrink: 0;
     transition: all 0.5s ease;
-    padding: 20px;
-    margin: 20px 0;
+    padding: 1.25rem; /* 20px */
+    margin: 1.25rem 0; /* 20px */
     box-sizing: border-box;
 }
 
 .project-card {
     background: rgba(30, 30, 30, 0.8);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 16px;
+    border-radius: 1rem; /* 16px */
     padding: 2rem;
     height: 100%;
     display: flex;
@@ -512,7 +519,7 @@ main h2 {
 
 .project-card:hover {
     transform: translateY(-10px) scale(1.02);
-    border-color: #7ce9e6;
+    border-color: var(--color-accent);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
 }
 
@@ -521,7 +528,8 @@ main h2 {
         transform: translateX(0);
     }
     100% {
-        transform: translateX(calc(-100% + 100vw));
+        /* This calculation might need fine-tuning based on actual content width */
+        transform: translateX(calc(-100% + 100vw)); 
     }
 }
 
@@ -537,12 +545,12 @@ main h2 {
 
 .slider-btn {
     position: relative;
-    width: 50px;
-    height: 50px;
+    width: 3.125rem; /* 50px */
+    height: 3.125rem; /* 50px */
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.2);
     border: none;
-    color: white;
+    color: var(--color-white);
     font-size: 1.5rem;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -554,55 +562,48 @@ main h2 {
     transform: scale(1.1);
 }
 
-.prev-btn {
-    left: 0;
-}
-
-.next-btn {
-    right: 0;
-}
-
 /* CONTACT SECTION */
 .contact-section {
-    padding: 10px 0;
+    padding: 0.625rem 0; /* 10px */
     margin-top: 1rem;
-    margin-bottom: 10rem;
+    margin-bottom: 6.25rem; /* 100px */
 }
 
 .section-header {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 2.5rem; /* 40px */
 }
 
 .section-header h3 {
     font-size: 5rem;
     font-weight: 700;
-    margin-bottom: 15px;
-    background-image: linear-gradient(rgb(133, 133, 133), rgb(255, 255, 255));
+    margin-bottom: 0.9375rem; /* 15px */
+    background-image: var(--gradient-text-light);
     color: transparent;
     background-clip: text;
+    -webkit-background-clip: text; /* For Safari */
 }
 
 .section-header p {
-    color: lightgray;
-    max-width: 600px;
+    color: var(--color-lightgray);
+    max-width: 37.5rem; /* 600px */
     margin: 0 auto;
 }
 
 /* CONTACT GRID */
 .contact-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 30px;
+    grid-template-columns: 1fr; /* Default for smaller screens */
+    gap: 1.875rem; /* 30px */
 }
 
 .info-card {
     background-color: #1e1e1e;
-    border-radius: 12px;
+    border-radius: 0.75rem; /* 12px */
     overflow: hidden;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease;
-    padding: 30px;
+    padding: 1.875rem; /* 30px */
 }
 
 .info-card:hover {
@@ -612,7 +613,7 @@ main h2 {
 .info-card h3 {
     font-size: 1.5rem;
     margin-bottom: 4rem;
-    color: lightgray;
+    color: var(--color-lightgray);
 }
 
 .contact-item {
@@ -621,110 +622,116 @@ main h2 {
 
 .contact-item p {
     font-weight: 600;
-    margin-bottom: 0.8rem;
-    color: #7ce9e6;
+    margin-bottom: 0.5rem; /* 8px */
+    color: var(--color-accent);
 }
 
 .contact-item a {
-    color: lightgray;
+    color: var(--color-lightgray);
     text-decoration: none;
     transition: color 0.3s;
 }
 
 .contact-item a:hover {
-    color: #7ce9e6;
+    color: var(--color-accent);
 }
 
 .social-link {
-    margin-top: 30px;
-    padding-top: 20px;
+    margin-top: 1.875rem; /* 30px */
+    padding-top: 1.25rem; /* 20px */
     border-top: 1px solid #333;
 }
 
 .social-link p {
-    margin-bottom: 15px;
-    color: #7ce9e6;
+    margin-bottom: 0.9375rem; /* 15px */
+    color: var(--color-accent);
     font-weight: 600;
 }
 
 .social-link a {
     display: inline-block;
-    margin-right: 15px;
-    color: lightgray;
+    margin-right: 0.9375rem; /* 15px */
+    color: var(--color-lightgray);
     text-decoration: none;
-    padding: 8px 15px;
+    padding: 0.5rem 0.9375rem; /* 8px 15px */
     background-color: #2d2d2d;
-    border-radius: 6px;
+    border-radius: 0.375rem; /* 6px */
     transition: all 0.2s;
 }
 
 .social-link a:hover {
-    background-color: #7ce9e6;
-    color: lightgray;
+    background-color: var(--color-accent);
+    color: var(--color-dark-primary);
 }
 
 /* FORM STYLE */
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem; /* 20px */
 }
 
 .form-control {
     width: 100%;
-    padding: 12px 15px;
+    padding: 0.75rem 0.9375rem; /* 12px 15px */
     background-color: #2d2d2d;
-    border-radius: 8px;
-    color: lightgray;
-    font-size: 16px;
+    border-radius: 0.5rem; /* 8px */
+    color: var(--color-lightgray);
+    font-size: 1rem;
     transition: border-color 0.3s;
     border: 1px solid #333;
 }
 
 .form-control:focus {
     outline: none;
-    color: #7ce9e6;
+    border-color: var(--color-accent); /* Highlight border on focus */
+    color: var(--color-accent);
 }
 
 textarea.form-control {
-    min-height: 120px;
+    min-height: 7.5rem; /* 120px */
     resize: vertical;
 }
 
 .message-btn {
     width: 100%;
-    padding: 12px;
+    padding: 0.75rem; /* 12px */
     background-color: rgba(124, 233, 230, 0.1);
-    color: #7ce9e6;
+    color: var(--color-accent);
     border: none;
-    border-radius: 8px;
-    font-size: 16px;
+    border-radius: 0.5rem; /* 8px */
+    font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 .message-btn:hover {
-    background-color: #7ce9e6;
-    color: #131314;
+    background-color: var(--color-accent);
+    color: var(--color-dark-primary);
 }
 
 .success-message {
     background-color: rgba(16, 185, 129, 0.2);
     color: #10b981;
-    padding: 12px;
-    border-radius: 8px;
-    margin-top: 20px;
-    display: none;
+    padding: 0.75rem; /* 12px */
+    border-radius: 0.5rem; /* 8px */
+    margin-top: 1.25rem; /* 20px */
+    display: none; /* Controlled by JS */
 }
 
 footer {
     display: flex;
     justify-content: space-between;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    left: 0;
+    align-items: center; /* Vertically align items */
+    margin-top: auto; /* Push to bottom if content is short */
     padding: 2rem 4rem;
     background-color: rgba(124, 233, 230, 0.1);
+    width: 100%;
+}
+
+footer h3 {
+    font-size: 1.5rem; /* Consistent with logo */
+    font-weight: 300;
+    letter-spacing: 1px;
 }
 
 .box-icons {
@@ -733,218 +740,85 @@ footer {
 }
 
 .box-icons a {
-    color: lightgray;
+    color: var(--color-lightgray);
     font-size: 2rem;
     transition: color 0.5s;
 }
 
 .box-icons a:hover {
-    color: #7ce9e6;
+    color: var(--color-accent);
 }
 
-/* ===== ENHANCED RESPONSIVE DESIGN ===== */
+/* =========================================
+   Media Queries for Responsiveness
+   ========================================= */
 
-/* Large screens and desktops (1600px+) */
-@media (min-width: 1600px) {
+/* Smallest Phones (e.g., iPhone SE portrait) - max-width: 374px */
+@media (max-width: 374px) {
     body {
-        padding: 4rem 6rem;
+        padding: 1rem;
     }
-    
-    main h1 {
-        font-size: 11rem;
-    }
-    
-    .bio {
-        max-width: 25rem;
-        font-size: 16px;
-    }
-    
-    .bento-grid {
-        max-width: 1400px;
-        margin: 0 auto;
-    }
-    
-    .card {
-        padding: 3rem;
-    }
-    
-    .projects-section h3,
-    .about-title,
-    .section-header h3 {
-        font-size: 6rem;
-    }
-}
 
-/* Large desktops (1200px - 1599px) */
-@media (max-width: 1599px) and (min-width: 1200px) {
-    main h1 {
-        font-size: 8rem;
-        letter-spacing: 3px;
-    }
-    
-    .bio {
-        max-width: 24rem;
-    }
-    
-    .model-box {
-        width: 28rem;
-        height: 28rem;
-        right: 8%;
-        top: -30%;
-    }
-}
-
-/* Standard laptops (992px - 1199px) */
-@media (max-width: 1199px) and (min-width: 992px) {
-    body {
-        padding: 2.5rem;
-    }
-    
-    main h1 {
-        font-size: 7rem;
-        letter-spacing: 2px;
-    }
-    
-    .bio {
-        max-width: 20rem;
-        font-size: 14px;
-    }
-    
-    .bento-grid {
-        width: 95%;
-        height: 85vh;
-    }
-    
-    .model-box {
-        width: 24rem;
-        height: 24rem;
-        right: 12%;
-        top: -25%;
-    }
-    
-    .about-title {
-        font-size: 4.5rem;
-    }
-    
-    .projects-section h3 {
-        font-size: 4.5rem;
-    }
-    
-    .section-header h3 {
-        font-size: 4.5rem;
-    }
-}
-
-/* Medium screens and tablets landscape (768px - 991px) */
-@media (max-width: 991px) and (min-width: 768px) {
-    body {
-        padding: 2rem;
-    }
-    
-    main h1 {
-        font-size: 6rem;
-        letter-spacing: 1px;
-    }
-    
-    .bio {
-        max-width: 18rem;
-        font-size: 13px;
-    }
-    
-    .bento-grid {
-        grid-template-columns: 1fr 1fr;
-        grid-template-areas: 
-            "intro intro"
-            "tech tech"
-            "time passion";
-        height: auto;
-        gap: 1rem;
-    }
-    
-    .intro {
-        min-height: 250px;
-    }
-    
-    .tech {
-        min-height: 400px;
-    }
-    
-    .time, .passion {
-        min-height: 200px;
-    }
-    
-    .model-box {
-        width: 20rem;
-        height: 20rem;
-        right: 15%;
-        top: 10%;
-    }
-    
-    .about-title {
-        font-size: 4rem;
-    }
-    
-    .projects-section {
-        margin-top: 15rem;
-    }
-    
-    .projects-section h3 {
-        font-size: 4rem;
-    }
-    
-    .section-header h3 {
-        font-size: 4rem;
-    }
-    
-    .slider .list .item {
-        width: 35rem;
-        height: 18rem;
-    }
-    
-    .contact-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-    }
-}
-
-/* Small tablets portrait (576px - 767px) */
-@media (max-width: 767px) and (min-width: 576px) {
-    body {
-        padding: 1.5rem;
-    }
-    
     header {
         flex-direction: column;
         gap: 1rem;
         padding-bottom: 1rem;
     }
-    
+
     .logo {
-        font-size: 1.3rem;
-        letter-spacing: 1px;
+        font-size: 1.1rem;
     }
-    
+
     .contact-btn {
-        padding: 0.4rem 1.5rem;
+        padding: 0.3rem 1rem;
+        font-size: 0.8rem;
+    }
+
+    main h1 {
+        display: none; /* Hide large H1 for tiny screens */
+    }
+
+    main h2 {
+        display: block;
+        font-size: 4.5rem;
+        margin-top: -2rem;
+        letter-spacing: 2px;
+    }
+
+    .location p {
         font-size: 0.9rem;
     }
-    
-    main h1 {
-        font-size: 5rem;
-        letter-spacing: 0;
-    }
-    
+
     .bio {
-        max-width: 16rem;
-        font-size: 12px;
+        font-size: 0.75rem;
+        max-width: 12rem;
     }
-    
+
     .scroll-down {
+        right: 1%;
+        bottom: 2%;
         height: 4rem;
         width: 1.5rem;
-        right: 3%;
     }
-    
+
+    .planet-3D {
+        top: -10%;
+        right: -30%;
+        width: 150%;
+        height: 150%;
+    }
+
+    .about-section {
+        margin-top: 10rem;
+        height: auto; /* Allow content to dictate height */
+        padding-bottom: 5rem;
+    }
+
+    .about-title, .projects-section h3, .section-header h3 {
+        font-size: 2.5rem;
+        margin-bottom: 3%;
+    }
+
     .bento-grid {
         grid-template-columns: 1fr;
         grid-template-areas: 
@@ -952,276 +826,147 @@ footer {
             "tech"
             "time"
             "passion";
+        width: 95%;
+        height: auto;
         gap: 1rem;
-        width: 100%;
     }
-    
+
     .card {
         padding: 1.5rem;
     }
-    
+
     .card-title {
-        font-size: 1.3rem;
+        font-size: 1rem;
+        margin-top: 0.5rem;
     }
-    
+
     .card-text {
-        font-size: 0.9rem;
+        font-size: 0.7rem;
         margin-top: 1rem;
         margin-bottom: 1rem;
     }
-    
-    .model-box {
-        width: 16rem;
-        height: 16rem;
-        right: 5%;
-        top: 20%;
-    }
-    
-    .about-title {
-        font-size: 3.5rem;
-    }
-    
-    .projects-section {
-        margin-top: 12rem;
-    }
-    
-    .projects-section h3 {
-        font-size: 3.5rem;
-    }
-    
-    .section-header h3 {
-        font-size: 3.5rem;
-    }
-    
-    .slider .list .item {
-        width: 25rem;
-        height: 15rem;
-    }
-    
-    .project-card {
-        padding: 1.5rem;
-    }
-}
 
-/* Large phones (481px - 575px) */
-@media (max-width: 575px) and (min-width: 481px) {
-    body {
-        padding: 1.2rem;
-    }
-    
-    header {
-        flex-direction: column;
-        gap: 0.8rem;
-    }
-    
-    .logo {
-        font-size: 1.2rem;
-    }
-    
-    main h1 {
-        display: none;
-    }
-    
-    main h2 {
-        display: block;
-        font-size: 6.5rem;
-        margin-top: -2rem;
-    }
-    
-    .location p {
-        font-size: 1rem;
-    }
-    
-    .bio {
-        max-width: 14rem;
-        font-size: 0.85rem;
-    }
-    
-    .bio-section {
-        margin-bottom: 1.5rem;
-    }
-    
-    .scroll-down {
-        height: 3.5rem;
-        width: 1.2rem;
-        right: 4%;
-        bottom: 3%;
-    }
-    
-    .about-title {
-        font-size: 3.2rem;
-        margin-bottom: 8%;
-    }
-    
-    .bento-grid {
-        width: 100%;
-        gap: 0.8rem;
-    }
-    
-    .card {
-        padding: 1.2rem;
-        border-radius: 16px;
-    }
-    
     .model-box {
-        width: 14rem;
-        height: 14rem;
-        right: 0%;
-        top: 25%;
-        scale: 0.8;
+        right: -10%;
+        top: 20%;
+        width: 15rem;
+        height: 15rem;
+        transform: scale(0.6); /* Further scale down for tiny screens */
+        transform-origin: top right;
     }
-    
+
+    .skills-3D {
+        height: 70%;
+    }
+
+    .bento-grid .btn {
+        bottom: 5%;
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+    }
+
     .projects-section {
         margin-top: 8rem;
     }
-    
-    .projects-section h3 {
-        font-size: 3.2rem;
-    }
-    
-    .section-header h3 {
-        font-size: 3.2rem;
-    }
-    
-    .slider .list .item {
-        width: 22rem;
-        height: 12rem;
-    }
-    
-    .contact-grid {
-        gap: 15px;
-    }
-    
-    .info-card {
-        padding: 20px;
-    }
-    
-    footer {
-        padding: 1.5rem 2rem;
-    }
-    
-    .box-icons {
-        gap: 1.5rem;
-    }
-    
-    .box-icons a {
-        font-size: 1.8rem;
-    }
-}
 
-/* Original existing media queries maintained */
-@media (max-width: 1400px) {
-    main h1 {
-        font-size: 6.3rem;
-        letter-spacing: 0;
-    }
-
-    .bento-grid {
-        position: relative;
-        display: grid;
-        height: 80vh;
-        width: 100%;
-        grid-template-columns: auto auto;
-        grid-template-areas: 
-            "intro tech"
-            "time passion";
-    }
-
-    .intro { 
-        grid-area: intro; 
-        min-height: 200px; 
-        min-width: 300px;
-    }
-
-    .tech {
-        grid-area: tech; 
-        height: 700px; 
-        min-width: 250px;
-    }
-
-    .time { 
-        grid-area: time; 
-        min-height: 220px; 
-        min-width: 250px;
-    }
-
-    .passion { 
-        grid-area: passion; 
-        min-height: 220px; 
-        min-width: 250px;
-    }
-
-    .card-title {
-        font-size: 1.2rem;
-        margin-top: 0;
-    }
-
-    .card-text {
-        line-height: 1.3;
-        font-size: 0.8rem;
-    }
-
-    .model-box {
-        right: 10%;
-        top: 18%;
-    }
-
-    .intro {
-        min-height: 700px;
-    }
-
-    .time {
-        grid-area: time; 
-        min-height: 300px;
-    }
-
-    .projects-section {
-        margin-top: 20rem;
-    }
-
-    .slider .list .item {
-        width: 40rem;
-        height: 20rem;
-    }
-
-    .slider .list {
-        min-width: calc(30rem * var(--quantity));
-    }
-}
-
-/* Standard mobile phones (320px - 480px) */
-@media (max-width: 480px) {
-    body {
-        padding: 1rem;
-    }
-    
-    header {
+    .slider-container {
         flex-direction: column;
         gap: 0.5rem;
-        padding-bottom: 0.5rem;
+    }
+
+    .slider {
+        width: 95%;
+        --width: 15rem; /* Smaller project card width */
+        --height: 8rem; /* Smaller project card height */
     }
     
-    .logo {
-        font-size: 1.1rem;
-        letter-spacing: 1px;
+    .slider .list {
+        min-width: calc(var(--width) * var(--quantity)); /* Adjust based on new width */
     }
-    
-    .contact-btn {
-        padding: 0.3rem 1.2rem;
+
+    .slider-btn {
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 1.2rem;
+        position: static; /* Remove absolute positioning */
+    }
+
+    .contact-section {
+        margin-top: 5rem;
+        margin-bottom: 5rem;
+    }
+
+    .section-header p {
         font-size: 0.8rem;
     }
-    
+
+    .info-card {
+        padding: 1.5rem;
+    }
+
+    .info-card h3 {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+    }
+
+    .contact-item {
+        margin-bottom: 1.5rem;
+    }
+
+    .contact-item p {
+        font-size: 0.9rem;
+    }
+
+    .contact-item a {
+        font-size: 0.85rem;
+    }
+
+    .social-link a {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+
+    .form-control {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    .message-btn {
+        padding: 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    footer {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+        text-align: center;
+    }
+
+    footer h3 {
+        font-size: 0.9rem;
+    }
+
+    .box-icons {
+        display: none; /* Hide social icons in footer for smallest phones */
+    }
+}
+
+
+/* Small Phones (e.g., iPhone X portrait) - max-width: 480px */
+@media (min-width: 375px) and (max-width: 480px) {
+    body {
+        padding: 1.5rem;
+    }
+
     main h1 {
         display: none;
     }
 
     main h2 {
         display: block;
+        font-size: 6rem;
         margin-top: -3rem;
-    }
-
-    .location p {
-        font-size: 0.95rem;
     }
 
     .bio-section {
@@ -1231,20 +976,6 @@ footer {
     .bio {
         font-size: 0.8rem;
         max-width: 15rem;
-        line-height: 1.4;
-    }
-    
-    .scroll-down {
-        height: 3rem;
-        width: 1rem;
-        right: 5%;
-        bottom: 2%;
-    }
-    
-    .scroll-down::before,
-    .scroll-down::after {
-        height: 8px;
-        width: 8px;
     }
 
     .bento-grid {
@@ -1254,35 +985,19 @@ footer {
             "tech"
             "time"
             "passion";
-        gap: 0.5rem;
-        width: 100%;
-    }
-    
-    .card {
-        padding: 1rem;
-        border-radius: 12px;
-    }
-    
-    .card-title {
-        font-size: 1.1rem;
-        margin-top: 0.5rem;
-    }
-    
-    .card-text {
-        font-size: 0.75rem;
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-        line-height: 1.4;
+        width: 95%;
+        height: auto;
     }
 
-    .about-title {
-        margin-bottom: 5%;
+    .about-title, .projects-section h3, .section-header h3 {
         font-size: 3rem;
     }
 
     .model-box {
         right: -4%;
         top: 27%;
+        width: 18rem;
+        height: 18rem;
         scale: 0.7;
     }
     
@@ -1303,60 +1018,17 @@ footer {
         margin-top: 10rem;
     }
 
-    .projects-section h3 {
-        font-size: 3rem;
-    }
-
     .slider .list .item {
         width: 20rem;
         height: 10rem;
     }
 
     .slider .list {
-        display: flex;
-        min-width: calc(10rem * var(--quantity));
-    }
-    
-    .project-card {
-        padding: 1rem;
-    }
-
-    .section-header h3 {
-        font-size: 3rem;
+        min-width: calc(10rem * var(--quantity)); /* Adjust based on new width */
     }
 
     .contact-section {
         margin-top: 0;
-        margin-bottom: 5rem;
-    }
-    
-    .contact-grid {
-        gap: 10px;
-    }
-    
-    .info-card {
-        padding: 15px;
-    }
-    
-    .info-card h3 {
-        font-size: 1.2rem;
-        margin-bottom: 2rem;
-    }
-    
-    .contact-item {
-        margin-bottom: 1.5rem;
-    }
-    
-    .social-link {
-        margin-top: 15px;
-        padding-top: 15px;
-    }
-    
-    .social-link a {
-        padding: 6px 12px;
-        font-size: 0.8rem;
-        margin-right: 8px;
-        margin-bottom: 8px;
     }
 
     .box-icons {
@@ -1366,306 +1038,285 @@ footer {
     footer h3 {
         font-size: 1rem;
     }
-    
-    footer {
-        padding: 1rem 2rem;
-    }
 }
 
-/* Small mobile phones (320px - 379px) */
-@media (max-width: 380px) {
+/* Tablets & Small Laptops (e.g., iPad portrait, small notebooks) - max-width: 768px */
+@media (min-width: 481px) and (max-width: 768px) {
     body {
-        padding: 1rem;
-    }
-    
-    .logo {
-        font-size: 1.2rem;
-    }
-    
-    main h2 {
-        font-size: 6rem;
+        padding: 2.5rem;
     }
 
-    .location p {
-        font-size: 1rem;
-    }
-
-    .contact-btn {
-        padding: 0.4rem 1.5rem;
-        font-size: 0.9rem;
-    }
-    
-    .bio {
-        font-size: 0.75rem;
-        max-width: 13rem;
-    }
-    
-    .scroll-down {
-        height: 2.5rem;
-        width: 0.8rem;
-    }
-    
-    .about-title {
-        font-size: 2.8rem;
-    }
-    
-    .projects-section h3 {
-        font-size: 2.8rem;
-    }
-    
-    .section-header h3 {
-        font-size: 2.8rem;
-    }
-    
-    .slider .list .item {
-        width: 18rem;
-        height: 9rem;
-    }
-    
-    .card {
-        padding: 0.8rem;
-    }
-    
-    .card-title {
-        font-size: 1rem;
-    }
-    
-    .card-text {
-        font-size: 0.7rem;
-    }
-
-    .model-box {
-        right: 2%;
-        top: 27%;
-        scale: 0.6;
-    }
-    
-    .info-card {
-        padding: 12px;
-    }
-    
-    .info-card h3 {
-        font-size: 1rem;
-        margin-bottom: 1.5rem;
-    }
-    
-    .contact-item {
-        margin-bottom: 1rem;
-    }
-    
-    .contact-item p {
-        font-size: 0.9rem;
-    }
-    
-    .contact-item a {
-        font-size: 0.8rem;
-    }
-
-    footer h3 {
-        font-size: 0.8rem;
-    }
-    
-    footer {
-        padding: 0.8rem 1rem;
-    }
-}
-
-/* Extra small devices (280px - 319px) */
-@media (max-width: 319px) {
-    body {
-        padding: 0.8rem;
-    }
-    
-    .logo {
-        font-size: 1rem;
-        letter-spacing: 1px;
-    }
-    
-    .contact-btn {
-        padding: 0.3rem 1rem;
-        font-size: 0.8rem;
-    }
-    
-    main h2 {
-        font-size: 5rem;
-        letter-spacing: 2px;
-    }
-    
-    .bio {
-        font-size: 0.7rem;
-        max-width: 11rem;
-        line-height: 1.3;
-    }
-    
-    .location p {
-        font-size: 0.9rem;
-    }
-    
-    .scroll-down {
-        height: 2rem;
-        width: 0.6rem;
-        right: 6%;
-    }
-    
-    .about-title {
-        font-size: 2.5rem;
-        margin-bottom: 8%;
-    }
-    
-    .projects-section h3 {
-        font-size: 2.5rem;
-    }
-    
-    .section-header h3 {
-        font-size: 2.5rem;
-    }
-    
-    .bento-grid {
-        gap: 0.3rem;
-    }
-    
-    .card {
-        padding: 0.6rem;
-        border-radius: 8px;
-    }
-    
-    .card-title {
-        font-size: 0.9rem;
-        margin-top: 0.3rem;
-    }
-    
-    .card-text {
-        font-size: 0.65rem;
-        margin-top: 0.8rem;
-        margin-bottom: 0.8rem;
-    }
-    
-    .model-box {
-        width: 10rem;
-        height: 10rem;
-        right: 0%;
-        top: 30%;
-        scale: 0.5;
-    }
-    
-    .slider .list .item {
-        width: 16rem;
-        height: 8rem;
-    }
-    
-    .project-card {
-        padding: 0.8rem;
-    }
-    
-    .info-card {
-        padding: 10px;
-    }
-    
-    .info-card h3 {
-        font-size: 0.9rem;
-        margin-bottom: 1rem;
-    }
-    
-    .contact-item p {
-        font-size: 0.8rem;
-    }
-    
-    .contact-item a {
-        font-size: 0.75rem;
-    }
-    
-    .form-control {
-        padding: 10px 12px;
-        font-size: 14px;
-    }
-    
-    .message-btn {
-        padding: 10px;
-        font-size: 14px;
-    }
-    
-    footer {
-        padding: 0.6rem 0.8rem;
-        flex-direction: column;
-        gap: 0.5rem;
-        text-align: center;
-    }
-    
-    footer h3 {
-        font-size: 0.7rem;
-    }
-}
-
-/* Landscape orientation adjustments for mobile devices */
-@media (max-height: 500px) and (orientation: landscape) {
-    .title-section {
-        margin-top: 1rem;
-    }
-    
     main h1 {
-        font-size: 4rem;
+        font-size: 7rem;
+        letter-spacing: 3px;
     }
-    
+
     main h2 {
-        font-size: 3.5rem;
-        margin-top: -1rem;
-    }
-    
-    .bio-section {
-        margin-top: 1rem;
-        margin-bottom: 0.5rem;
-    }
-    
-    .scroll-down {
         display: none;
     }
-    
+
+    .bio {
+        max-width: 20rem;
+        font-size: 0.9rem;
+    }
+
+    .scroll-down {
+        right: 4%;
+        bottom: 8%;
+    }
+
     .about-section {
+        margin-top: 15rem;
         height: auto;
-        margin-top: 5rem;
+        padding-bottom: 8rem;
     }
-    
+
+    .about-title, .projects-section h3, .section-header h3 {
+        font-size: 4rem;
+        margin-bottom: 4%;
+    }
+
+    .bento-grid {
+        grid-template-columns: 1fr; /* Stack cards vertically */
+        grid-template-areas: 
+            "intro"
+            "tech"
+            "time"
+            "passion";
+        width: 90%;
+        height: auto;
+        gap: 1.5rem;
+    }
+
+    .intro, .tech, .time, .passion {
+        min-height: auto; /* Let content define height */
+        height: auto;
+    }
+
+    .model-box {
+        position: static; /* Remove absolute positioning for better flow */
+        margin: 2rem auto 0; /* Center it below text */
+        width: 25rem;
+        height: 25rem;
+        transform: scale(0.8);
+        transform-origin: center;
+    }
+
+    .card-text {
+        font-size: 0.9rem;
+        max-width: 100%; /* Allow text to fill card width */
+    }
+
+    .bento-grid .skills-group {
+        position: static; /* Remove absolute positioning */
+        margin-top: 1rem;
+        width: 100%;
+        left: auto;
+        bottom: auto;
+        text-align: center;
+    }
+
+    .bento-grid .btn {
+        position: static; /* Remove absolute positioning */
+        margin-top: 1.5rem;
+        width: auto;
+        bottom: auto;
+        left: auto;
+    }
+
     .projects-section {
-        margin-top: 5rem;
+        margin-top: 15rem;
     }
-    
-    .contact-section {
-        margin-top: 2rem;
-        margin-bottom: 2rem;
-    }
-}
 
-/* High resolution displays */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-    .info-3D,
-    .skills-3D {
-        image-rendering: -webkit-optimize-contrast;
-        image-rendering: crisp-edges;
+    .slider {
+        --width: 28rem; /* Adjusted for tablets */
+        --height: 15rem;
     }
-    
-    .card {
-        backdrop-filter: blur(10px);
-    }
-}
 
-/* Reduced motion preferences */
-@media (prefers-reduced-motion: reduce) {
-    .info-3D,
-    .skills-3D {
-        animation: none;
-    }
-    
     .slider .list {
-        animation: none;
+        min-width: calc(var(--width) * var(--quantity));
     }
-    
-    .scroll-down::before,
-    .scroll-down::after {
-        animation: none;
+
+    .slider-btn {
+        width: 3rem;
+        height: 3rem;
+        font-size: 1.3rem;
     }
-    
-    * {
-        transition-duration: 0.01ms !important;
-        animation-duration: 0.01ms !important;
+
+    .contact-grid {
+        grid-template-columns: 1fr; /* Keep single column */
     }
+
+    footer {
+        padding: 1.5rem 2.5rem;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .box-icons {
+        gap: 1.5rem;
+    }
+}
+
+/* Laptops & Desktops (common laptop sizes) - max-width: 1024px */
+@media (min-width: 769px) and (max-width: 1024px) {
+    body {
+        padding: 3rem;
+    }
+
+    main h1 {
+        font-size: 8rem;
+        letter-spacing: 4px;
+    }
+
+    .bio {
+        max-width: 20rem;
+    }
+
+    .about-section {
+        margin-top: 18rem;
+        height: 90vh; /* Restore some height */
+    }
+
+    .about-title {
+        font-size: 4.5rem;
+    }
+
+    .bento-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-areas: 
+            "intro tech"
+            "time passion";
+        height: 80vh; /* Adjust height for better fit */
+        width: 90%;
+        gap: 1.5rem;
+    }
+
+    .intro { 
+        min-height: 400px;
+    }
+
+    .tech {
+        min-height: 400px;
+    }
+
+    .time, .passion { 
+        min-height: 200px;
+    }
+
+    .model-box {
+        right: 5%;
+        top: 0%;
+        width: 28rem;
+        height: 28rem;
+    }
+
+    .projects-section {
+        margin-top: 18rem;
+    }
+
+    .projects-section h3, .section-header h3 {
+        font-size: 4.5rem;
+    }
+
+    .slider {
+        --width: 35rem;
+        --height: 18rem;
+    }
+
+    .slider .list {
+        min-width: calc(var(--width) * var(--quantity));
+    }
+
+    .contact-grid {
+        grid-template-columns: repeat(2, 1fr); /* Two columns for contact */
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    footer {
+        padding: 2rem 3rem;
+    }
+}
+
+/* Large Laptops & Desktops - max-width: 1400px */
+@media (min-width: 1025px) and (max-width: 1400px) {
+    main h1 {
+        font-size: 6.3rem; /* Slightly smaller for this range */
+        letter-spacing: 0;
+    }
+
+    .bento-grid {
+        height: 80vh;
+        width: 100%;
+        grid-template-columns: auto auto; /* Keeps original structure */
+        grid-template-areas: 
+            "intro tech"
+            "time passion"; /* Simplified grid areas for two columns */
+    }
+
+    .intro { 
+        min-height: 700px; /* Example, adjust as needed */
+        min-width: 300px;
+    }
+
+    .tech {
+        height: 700px; /* Example, adjust as needed */
+        min-width: 250px;
+    }
+
+    .time { 
+        min-height: 300px;
+        min-width: 250px;
+    }
+
+    .passion { 
+        min-height: 220px; 
+        min-width: 250px;
+    }
+
+    .card-title {
+        font-size: 1.2rem;
+        margin-top: 0;
+    }
+
+    .card-text {
+        line-height: 1.3;
+        font-size: 0.8rem;
+    }
+
+    .model-box {
+        right: 10%;
+        top: 18%;
+        width: 25rem; /* Adjusted for this breakpoint */
+        height: 25rem;
+    }
+
+    .projects-section {
+        margin-top: 20rem;
+    }
+
+    .slider {
+        --width: 40rem; /* Adjusted for this breakpoint */
+        --height: 20rem;
+    }
+
+    .slider .list {
+        min-width: calc(30rem * var(--quantity));
+    }
+
+    .about-title, .projects-section h3, .section-header h3 {
+        font-size: 5rem; /* Back to original size */
+    }
+
+    .contact-grid {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 900px;
+        margin: 0 auto;
+    }
+}
+
+/* Extra Large Desktops (1401px and up) - Default styles */
+@media (min-width: 1401px) {
+    /* No specific changes needed as default styles already apply and are optimized for larger screens */
 }
